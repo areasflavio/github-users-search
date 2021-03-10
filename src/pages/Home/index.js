@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { ImSpinner8 } from 'react-icons/im';
 
 import logo from '../../assets/logo-vertical.svg';
 import { UserContext } from '../../contexts/UserContext';
@@ -6,14 +7,14 @@ import { UserContext } from '../../contexts/UserContext';
 import { Container } from './styles';
 
 function Home() {
-  const { setUser } = useContext(UserContext);
+  const { setUsername, loading, error } = useContext(UserContext);
 
   function handleSearch(event) {
     event.preventDefault();
 
     const { value } = event.target[0];
 
-    setUser(value);
+    setUsername(value);
   }
 
   return (
@@ -22,8 +23,11 @@ function Home() {
 
       <form action="" onSubmit={handleSearch}>
         <input type="text" placeholder="Enter user name" enterKeyHint="send" />
+        {error && <span>User not found</span>}
 
-        <button type="submit">Search</button>
+        <button type="submit">
+          {loading ? <ImSpinner8 size={20} color="#fff" /> : <>Search</>}
+        </button>
       </form>
     </Container>
   );
