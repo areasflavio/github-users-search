@@ -6,6 +6,7 @@ export const UserContext = createContext({});
 
 export function UserProvider({ children }) {
   const [username, setUsername] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -17,8 +18,7 @@ export function UserProvider({ children }) {
         `https://api.github.com/users/${username}`
       );
 
-      // eslint-disable-next-line no-console
-      console.log(response.data);
+      setUser(response.data);
 
       setLoading(false);
       setError(null);
@@ -36,7 +36,7 @@ export function UserProvider({ children }) {
   }, [username]);
 
   return (
-    <UserContext.Provider value={{ setUsername, loading, error }}>
+    <UserContext.Provider value={{ user, setUsername, loading, error }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,21 +1,22 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { UserProvider } from './contexts/UserContext';
 
 import DefaultLayout from './pages/_layouts/Default';
-import Home from './pages/Home';
+import Routes from './routes';
 
 import GlobalStyle from './styles/global';
 
 export default function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyle />
       <DefaultLayout>
         <UserProvider>
-          <Home />
+          <Routes />
         </UserProvider>
       </DefaultLayout>
-    </>
+    </BrowserRouter>
   );
 }
