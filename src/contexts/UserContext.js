@@ -14,11 +14,23 @@ export function UserProvider({ children }) {
     try {
       setLoading(true);
 
-      const response = await axios.get(
+      const userData = await axios.get(
         `https://api.github.com/users/${username}`
       );
 
-      setUser(response.data);
+      const reposData = await axios.get(
+        `https://api.github.com/users/${username}/repos`
+      );
+
+      setUser({
+        ...userData.data,
+        repos: reposData.data,
+        totalStars: reposData.data.reduce((total, repo) => {
+          total += repo.stargazers_count;
+
+          return total;
+        }, 0),
+      });
 
       setLoading(false);
       setError(null);
@@ -36,7 +48,9 @@ export function UserProvider({ children }) {
   }, [username]);
 
   return (
-    <UserContext.Provider value={{ user, setUsername, loading, error }}>
+    <UserContext.Provider
+      value={{ user, setUser, setUsername, loading, error }}
+    >
       {children}
     </UserContext.Provider>
   );
