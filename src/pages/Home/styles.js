@@ -17,6 +17,7 @@ export const Container = styled.div`
   justify-content: center;
 
   width: 25%;
+  min-width: 22.875rem;
 
   form {
     min-width: 100%;
@@ -77,5 +78,11 @@ export const Container = styled.div`
     font-size: 0.75rem;
 
     margin-top: 0.25rem;
+  }
+
+  @media (max-width: 484px) {
+    & {
+      min-width: 16.875rem;
+    }
   }
 `;

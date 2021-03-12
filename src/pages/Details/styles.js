@@ -50,6 +50,52 @@ export const UserDetails = styled.section`
   svg {
     color: #8752cc;
   }
+
+  @media (max-width: 1240px) {
+    & {
+      flex-direction: column;
+      padding: 2rem 0;
+
+      img {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 584px) {
+    & {
+      img {
+        width: 10.125rem;
+        height: 10.125rem;
+      }
+    }
+  }
+`;
+
+export const UserInfo = styled.div`
+  section {
+    display: flex;
+    flex-direction: column;
+
+    div {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 1240px) {
+    & {
+      section {
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      div {
+        justify-content: center;
+      }
+    }
+  }
 `;
 
 export const UserName = styled.main`
@@ -77,17 +123,10 @@ export const UserName = styled.main`
       color: ${darken(0.25, '#b2b2b2')};
     }
   }
-`;
 
-export const UserInfo = styled.div`
-  section {
-    display: flex;
-    flex-direction: column;
-
-    div {
-      display: flex;
+  @media (max-width: 1240px) {
+    & {
       align-items: center;
-      flex-wrap: wrap;
     }
   }
 `;
@@ -96,6 +135,7 @@ export const InfoItem = styled.div`
   display: flex;
 
   small {
+    text-align: center;
     font-size: 1rem;
     line-height: 1.4rem;
 
@@ -130,7 +170,7 @@ export const ReposList = styled.ul`
   list-style: none;
 
   display: grid;
-  grid-template-columns: repeat(3, minmax(17.625rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(17.625rem, 1fr));
   grid-gap: 1.5625rem;
 
   li {
@@ -184,6 +224,12 @@ export const ReposList = styled.ul`
       overflow: hidden;
       text-overflow: ellipsis;
       max-height: 2rem;
+    }
+  }
+
+  @media (max-width: 412px) {
+    & {
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
     }
   }
 `;
