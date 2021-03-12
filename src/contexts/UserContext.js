@@ -41,8 +41,12 @@ export function UserProvider({ children }) {
   }
 
   useEffect(() => {
+    setUsername(localStorage.getItem('username'));
+
     if (username) {
       getGithubUser();
+
+      localStorage.setItem('username', username);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);

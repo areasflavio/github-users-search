@@ -9,12 +9,13 @@ import {
 } from 'react-icons/md';
 import { SiGit } from 'react-icons/si';
 import { BiGitBranch } from 'react-icons/bi';
-import { FaFileCode } from 'react-icons/fa';
+import { FaFileCode, FaGithub, FaLinkedin } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
 import logo from '../../assets/logo-horizontal.svg';
 
 import {
+  Wrapper,
   Container,
   UserDetails,
   UserName,
@@ -23,6 +24,7 @@ import {
   UserTotalRepos,
   ReposList,
   GithubInfo,
+  Footer,
 } from './styles';
 import { UserContext } from '../../contexts/UserContext';
 
@@ -34,98 +36,125 @@ function Details({ history }) {
 
     setUser(null);
     setUsername(null);
+    localStorage.removeItem('username');
   }
 
   return (
-    <Container>
-      <header>
-        <img src={logo} alt="Github Search" />
+    <Wrapper>
+      <Container>
+        <header>
+          <img src={logo} alt="Github Search" />
 
-        <MdArrowBack size={40} onClick={() => handleGoBack()} />
-      </header>
+          <MdArrowBack size={40} onClick={() => handleGoBack()} />
+        </header>
 
-      <UserDetails>
-        <img src={user.avatar_url} alt={user.name} />
+        <UserDetails>
+          <img src={user.avatar_url} alt={user.name} />
 
-        <UserInfo>
-          <UserName>
-            <h1>{user.name}</h1>@{user.login}
-          </UserName>
+          <UserInfo>
+            <UserName>
+              <h1>{user.name}</h1>
+              <a href={user.html_url} target="__blank" rel="noreferrer">
+                @{user.login}
+              </a>
+            </UserName>
 
-          <div>
-            {user.location && (
-              <InfoItem>
-                <MdPlace size={16} />
-                <small>{user.location}</small>
-              </InfoItem>
-            )}
-            {user.company && (
-              <InfoItem>
-                <MdWork size={16} />
-                <small>{user.company}</small>
-              </InfoItem>
-            )}
-            {user.followers && (
-              <InfoItem>
-                <MdPeople size={16} />
-                <small>{user.followers}</small>
-              </InfoItem>
-            )}
-            {user.following && (
-              <InfoItem>
-                <MdPeopleOutline size={16} />
-                <small>{user.following}</small>
-              </InfoItem>
-            )}
-            {user.totalStars > 0 && (
-              <InfoItem>
-                <MdStar size={16} />
-                <small>{user.totalStars}</small>
-              </InfoItem>
-            )}
-          </div>
-        </UserInfo>
-
-        <UserTotalRepos>
-          Total Repositories
-          <strong>
-            <SiGit size={24} />
-
-            {user.public_repos}
-          </strong>
-        </UserTotalRepos>
-      </UserDetails>
-
-      <ReposList>
-        {user.repos.map((repo) => (
-          <li key={repo.id}>
-            <a href={repo.html_url} target="__blank" rel="noreferrer">
-              {repo.name}
-            </a>
-            <p>{repo.description}</p>
-
-            <GithubInfo>
+            <section>
               <div>
-                <MdStar size={16} />
-                {repo.stargazers_count}
+                {user.location && (
+                  <InfoItem>
+                    <MdPlace size={16} />
+                    <small>{user.location}</small>
+                  </InfoItem>
+                )}
+                {user.company && (
+                  <InfoItem>
+                    <MdWork size={16} />
+                    <small>{user.company}</small>
+                  </InfoItem>
+                )}
               </div>
-
               <div>
-                <BiGitBranch size={16} />
-                {repo.forks_count}
+                {user.followers && (
+                  <InfoItem>
+                    <MdPeople size={16} />
+                    <small>{user.followers}</small>
+                  </InfoItem>
+                )}
+                {user.following && (
+                  <InfoItem>
+                    <MdPeopleOutline size={16} />
+                    <small>{user.following}</small>
+                  </InfoItem>
+                )}
+                {user.totalStars > 0 && (
+                  <InfoItem>
+                    <MdStar size={16} />
+                    <small>{user.totalStars}</small>
+                  </InfoItem>
+                )}
               </div>
+            </section>
+          </UserInfo>
 
-              {repo.language && (
+          <UserTotalRepos>
+            Total Repositories
+            <strong>
+              <SiGit size={24} />
+
+              {user.public_repos}
+            </strong>
+          </UserTotalRepos>
+        </UserDetails>
+
+        <ReposList>
+          {user.repos.map((repo) => (
+            <li key={repo.id}>
+              <a href={repo.html_url} target="__blank" rel="noreferrer">
+                {repo.name}
+              </a>
+              <p>{repo.description}</p>
+
+              <GithubInfo>
                 <div>
-                  <FaFileCode size={16} />
-                  {repo.language}
+                  <MdStar size={16} />
+                  {repo.stargazers_count}
                 </div>
-              )}
-            </GithubInfo>
-          </li>
-        ))}
-      </ReposList>
-    </Container>
+
+                <div>
+                  <BiGitBranch size={16} />
+                  {repo.forks_count}
+                </div>
+
+                {repo.language && (
+                  <div>
+                    <FaFileCode size={16} />
+                    {repo.language}
+                  </div>
+                )}
+              </GithubInfo>
+            </li>
+          ))}
+        </ReposList>
+      </Container>
+
+      <Footer>
+        <a
+          href="https://github.com/areasflavio"
+          target="__blank"
+          rel="noreferrer"
+        >
+          <FaGithub size={20} />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/areasflavio/"
+          target="__blank"
+          rel="noreferrer"
+        >
+          <FaLinkedin size={20} />
+        </a>
+      </Footer>
+    </Wrapper>
   );
 }
 

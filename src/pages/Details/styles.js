@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -18,8 +19,12 @@ export const Container = styled.div`
     svg {
       color: #b2b2b2;
 
+      transition: all 0.2s;
+
       &:hover {
         cursor: pointer;
+
+        color: ${darken(0.25, '#b2b2b2')};
       }
     }
   }
@@ -32,13 +37,13 @@ export const UserDetails = styled.section`
 
   min-width: 100%;
   margin: 0 auto;
-  padding: 5rem 8rem;
+  padding: 5rem 0;
 
   color: #b2b2b2;
 
   img {
-    width: 9.125rem;
-    height: 9.125rem;
+    width: 14.125rem;
+    height: 14.125rem;
     border-radius: 50%;
   }
 
@@ -61,16 +66,29 @@ export const UserName = styled.main`
     font-size: 1.5rem;
     line-height: 1.75rem;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    transition: all 0.2s;
+
+    &:hover {
+      color: ${darken(0.25, '#b2b2b2')};
+    }
+  }
 `;
 
 export const UserInfo = styled.div`
-  max-width: 14rem;
-
-  div {
+  section {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 
-    flex-wrap: wrap;
+    div {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
   }
 `;
 
@@ -125,6 +143,13 @@ export const ReposList = styled.ul`
     color: #b2b2b2;
     background: #201f1f;
 
+    transition: all 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+      z-index: 1;
+    }
+
     a {
       text-decoration: none;
       color: #b2b2b2;
@@ -133,6 +158,21 @@ export const ReposList = styled.ul`
       line-height: 1.3125rem;
 
       margin-bottom: 0.5rem;
+
+      position: relative;
+
+      &:hover {
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          height: 2px;
+          width: 100%;
+          background: #8752cc;
+          border-radius: 50%;
+        }
+      }
     }
 
     p {
@@ -164,6 +204,38 @@ export const GithubInfo = styled.div`
     svg {
       color: #8752cc;
       margin-right: 0.2rem;
+    }
+  }
+`;
+
+export const Wrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #201f1f;
+  padding: 0.5rem 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg {
+    color: #b2b2b2;
+    margin: 0 0.25rem;
+
+    transition: all 0.2s;
+
+    &:hover {
+      color: #8752cc;
     }
   }
 `;
